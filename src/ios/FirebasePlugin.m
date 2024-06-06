@@ -5,7 +5,7 @@
 #import "AppDelegate.h"
 #import <GoogleSignIn/GoogleSignIn.h>
 @import FirebaseMessaging;
-@import FirebaseAnalytics;
+//@import FirebaseAnalytics;
 @import FirebaseRemoteConfig;
 @import FirebasePerformance;
 @import FirebaseCore;
@@ -1596,7 +1596,7 @@ static FIROAuthProvider* oauthProvider;
          @try {
             BOOL enabled = [[command argumentAtIndex:0] boolValue];
             CDVPluginResult* pluginResult;
-            [FIRAnalytics setAnalyticsCollectionEnabled:enabled];
+//            [FIRAnalytics setAnalyticsCollectionEnabled:enabled];
             [self setPreferenceFlag:FIREBASE_ANALYTICS_COLLECTION_ENABLED flag:enabled];
             pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
 
@@ -1633,7 +1633,7 @@ static FIROAuthProvider* oauthProvider;
             [consentSettings setObject:consentStatus forKey:consentType];
         }
 
-        [FIRAnalytics setConsent:consentSettings];
+//        [FIRAnalytics setConsent:consentSettings];
 
         pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
         [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
@@ -1642,13 +1642,13 @@ static FIROAuthProvider* oauthProvider;
 
 - (NSString*)consentTypeFromString:(NSString*)consentTypeString {
     if ([consentTypeString isEqualToString:@"ANALYTICS_STORAGE"]) {
-        return FIRConsentTypeAnalyticsStorage;
+//        return FIRConsentTypeAnalyticsStorage;
     } else if ([consentTypeString isEqualToString:@"AD_STORAGE"]) {
-        return FIRConsentTypeAdStorage;
+//        return FIRConsentTypeAdStorage;
     } else if ([consentTypeString isEqualToString:@"AD_PERSONALIZATION"]) {
-        return FIRConsentTypeAdPersonalization;
+//        return FIRConsentTypeAdPersonalization;
     } else if ([consentTypeString isEqualToString:@"AD_USER_DATA"]) {
-        return FIRConsentTypeAdUserData;
+//        return FIRConsentTypeAdUserData;
     } else {
         return nil;
     }
@@ -1656,9 +1656,9 @@ static FIROAuthProvider* oauthProvider;
 
 - (NSString*)consentStatusFromString:(NSString*)consentStatusString {
     if ([consentStatusString isEqualToString:@"GRANTED"]) {
-        return FIRConsentStatusGranted;
+//        return FIRConsentStatusGranted;
     } else if ([consentStatusString isEqualToString:@"DENIED"]) {
-        return FIRConsentStatusDenied;
+//        return FIRConsentStatusDenied;
     } else {
         return nil;
     }
@@ -1670,7 +1670,7 @@ static FIROAuthProvider* oauthProvider;
             NSString* name = [command.arguments objectAtIndex:0];
             NSDictionary *parameters = [command argumentAtIndex:1];
 
-            [FIRAnalytics logEventWithName:name parameters:parameters];
+//            [FIRAnalytics logEventWithName:name parameters:parameters];
 
             CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
             [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
@@ -1683,7 +1683,7 @@ static FIROAuthProvider* oauthProvider;
 - (void)setScreenName:(CDVInvokedUrlCommand *)command {
     @try {
         NSString* name = [command.arguments objectAtIndex:0];
-        [FIRAnalytics logEventWithName:kFIREventScreenView parameters: @{kFIRParameterScreenName: name}];
+//        [FIRAnalytics logEventWithName:kFIREventScreenView parameters: @{kFIRParameterScreenName: name}];
         CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
         [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
     }@catch (NSException *exception) {
@@ -1696,7 +1696,7 @@ static FIROAuthProvider* oauthProvider;
         @try {
             NSString* id = [command.arguments objectAtIndex:0];
 
-            [FIRAnalytics setUserID:id];
+//            [FIRAnalytics setUserID:id];
 
             CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
             [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
@@ -1712,7 +1712,7 @@ static FIROAuthProvider* oauthProvider;
             NSString* name = [command.arguments objectAtIndex:0];
             NSString* value = [command.arguments objectAtIndex:1];
 
-            [FIRAnalytics setUserPropertyString:value forName:name];
+//            [FIRAnalytics setUserPropertyString:value forName:name];
 
             CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
             [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
@@ -1727,9 +1727,9 @@ static FIROAuthProvider* oauthProvider;
         @try {
             NSDictionary* userIdentifier = [command.arguments objectAtIndex:0];
             if([userIdentifier objectForKey:@"emailAddress"] != nil){
-                [FIRAnalytics initiateOnDeviceConversionMeasurementWithEmailAddress:[userIdentifier objectForKey:@"emailAddress"]];
+//                [FIRAnalytics initiateOnDeviceConversionMeasurementWithEmailAddress:[userIdentifier objectForKey:@"emailAddress"]];
             }else if([userIdentifier objectForKey:@"phoneNumber"] != nil){
-                [FIRAnalytics initiateOnDeviceConversionMeasurementWithPhoneNumber:[userIdentifier objectForKey:@"phoneNumber"]];
+//                [FIRAnalytics initiateOnDeviceConversionMeasurementWithPhoneNumber:[userIdentifier objectForKey:@"phoneNumber"]];
             }
 
             [self sendPluginSuccess:command];
